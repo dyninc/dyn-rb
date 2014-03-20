@@ -1,4 +1,3 @@
-
 # Acknowledgements
 
 NOTE: if we forgot to list you here, please file a pull
@@ -13,13 +12,17 @@ through the 'dynect_rest' rubygem.
 * Josh Nichols
 
 In addition, many people inspire this library through
-their own projects building on 'dynect_rest'.
+their own projects building on 'dynect_rest' or the
+Dyn APIs directly.
 
-CDN Control - https://github.com/etsy/cdncontrol
+#### CDN Control - https://github.com/etsy/cdncontrol
 by Jon Cowie, Nassim Kammah, Marcus Barczak, Etsy
 
-Chef Cookbook - https://github.com/opscode-cookbooks/dynect
+#### Chef Cookbook - https://github.com/opscode-cookbooks/dynect
 by Adam Jacob
 
-Dynect Create - https://github.com/floehmann/dynect_create
+#### Dynect Create - https://github.com/floehmann/dynect_create
 by Fran Loehmann
+
+#### Dynect4r - https://github.com/mconigliaro/dynect4r
+by Michael Conigliaro, Bernhard Wiedmann
