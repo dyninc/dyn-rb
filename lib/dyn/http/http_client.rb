@@ -26,7 +26,7 @@ module Dyn
         @host = host
         @port = port
         @base_url = "#{protocol}://#{host}:#{port.to_s}"
-        @default_headers = {}
+        @default_headers = {"User-Agent" => "dyn-rb 0.0.1"}
       end
 
       def request(method, uri, body, headers)
