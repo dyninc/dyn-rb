@@ -43,7 +43,7 @@ module Dyn
     end
 
     unless defined?(DefaultClient)
-      class DefaultClient < Dynect::HttpClient::NetHttpClient
+      class DefaultClient < Dyn::HttpClient::NetHttpClient
       end
     end
   end
