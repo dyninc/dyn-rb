@@ -24,7 +24,7 @@ module Dyn
       attr_accessor :fqdn, :code, :keep_uri, :url
 
       def initialize(dyn, zone, fqdn=nil)
-        @dyn = dynect
+        @dyn = dyn
         @zone = zone
         @fqdn = fqdn
         @code = nil

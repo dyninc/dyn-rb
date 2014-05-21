@@ -30,7 +30,7 @@ module Dyn
       # @param [String] The zone to publish - if one is provided when instantiated, we use that.
       # @return [Hash] The dynect API response
       def publish
-        @dynect.put("Zone/#{@zone}", { "publish" => true })
+        @dyn.put("Zone/#{@zone}", { "publish" => true })
       end
 
       # Freeze the zone.
@@ -40,7 +40,7 @@ module Dyn
       # @param [String] The zone to freeze - if one is provided when instantiated, we use that.
       # @return [Hash] The dynect API response
       def freeze
-        @dynect.put("Zone/#{@zone}", { "freeze" => true })
+        @dyn.put("Zone/#{@zone}", { "freeze" => true })
       end
 
       # Thaw the zone.
@@ -50,7 +50,7 @@ module Dyn
       # @param [String] The zone to thaw - if one is provided when instantiated, we use that.
       # @return [Hash] The dynect API response
       def thaw
-        @dynect.put("Zone/#{@zone}", { "thaw" => true })
+        @dyn.put("Zone/#{@zone}", { "thaw" => true })
       end
     end
   end
