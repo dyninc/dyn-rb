@@ -15,5 +15,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-require 'dyn/traffic'
-require 'dyn/messaging'
+
+module Dyn
+  module Messaging
+    class Recipients
+      def initialize(dyn)
+        @dyn = dyn
+      end
+
+      def status(email)
+        @dyn.get("#{resource_path}/status", {emailaddress:email})
+      end
+
+      def activate(email)
+        @dyn.post("#{resource_path}/activate", {emailaddress:email})
+      end
+      
+      private
+      
+      def resource_path
+        "recipients"
+      end
+    end
+  end
+end

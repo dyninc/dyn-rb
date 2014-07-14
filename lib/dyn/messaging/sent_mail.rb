@@ -15,5 +15,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-require 'dyn/traffic'
-require 'dyn/messaging'
+
+module Dyn
+  module Messaging
+    class SentMail
+      def initialize(dyn)
+        @dyn = dyn
+      end
+
+      def count(starttime, endtime, sender, xheadername)
+        @dyn.get("#{resource_path}/count", {starttime:starttime, endtime:endtime, sender:sender, xheadername:xheadername})
+      end
+
+      def list(starttime, endtime, startindex=0, sender, xheadername)
+        @dyn.get("#{resource_path}", {starttime:starttime, endtime:endtime, startindex:startindex, sender:sender, xheadername:xheadername})
+      end
+      
+      private
+      
+      def resource_path
+        "reports/sent"
+      end
+    end
+  end
+end

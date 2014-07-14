@@ -15,5 +15,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-require 'dyn/traffic'
-require 'dyn/messaging'
+
+module Dyn
+  module Messaging
+    class SendMail
+      def initialize(dyn)
+        @dyn = dyn
+      end
+
+      def create(from, to, subject, bodytext, bodyhtml, cc, replyto, xheaders)
+        @dyn.post("#{resource_path}", {from:from, to:to, subject:subject, bodytext:bodytext, cc:cc, replyto:replyto, xheaders:xheaders})
+      end
+      
+      private
+      
+      def resource_path
+        "send"
+      end
+    end
+  end
+end

@@ -1,6 +1,6 @@
-# Dyn SDK for Ruby - Developer Preview
+# Dyn SDK for Ruby
 
-NOTE: This is a developer preview - we welcome your feedback!
+NOTE: This SDK is brand new - we welcome your feedback!
 Please reach out via pull request or GitHub issue.
 
 Making DNS Updates as easy as:
@@ -52,13 +52,41 @@ Working with GSLB looks like:
     # 6: publish zone
     dyn.zone.publish
 
+Working with Messaging is as easy as:
+
+    require 'dyn-rb'
+    
+    # 1: create the client
+    dyn = Dyn::Messaging::Client.new(apikey)
+    
+    # 2: work with accounts
+    puts "retrieving accounts list..."
+    puts dyn.accounts.list.inspect
+    
+    # 3: work with senders
+    dyn.senders.create("person@example.com", 0)
+    
+    # 4: work with recipients
+    puts dyn.recipients.status("example@example.com").inspect
+    
+    # 5: send mail
+    dyn.send_mail.create("example@example.com", "recipient@recipient.com", "hi!", "from the ruby api!", "<html>hi html</html>", "replyto@example.com", "ccaddress@recipient.com", "xheader1")
+    
+    # 6: check reports
+    puts dyn.delivery.list("2013-11-11", "2013-12-12", "example@example.com", "X-example4").inspect
+
+# Examples
+
+See more comprehensive examples in the "examples" folder!
 
 # API Endpoints Supported
 
-* Session API: create/destroy
-* Record API: AAAA A CNAME DNSKEY DS KEY LOC MX NS PTR RP SOA SRV TXT
-* GSLB API: get/create/update/delete
-* Zone API: publish/freeze/thaw
+* Traffic - Session API: create/destroy
+* Traffic - Record API: AAAA A CNAME DNSKEY DS KEY LOC MX NS PTR RP SOA SRV TXT
+* Traffic - GSLB API: get/create/update/delete
+* Traffic - Http Redirect API: get/create/update/delete
+* Traffic - Zone API: publish/freeze/thaw
+* Messaging - All Endpoints Supported
 
 # Ruby HTTP Clients Supported
 
@@ -69,3 +97,7 @@ Working with GSLB looks like:
 # Known Issues
 
 * None yet
+
+# License
+
+Apache License v2.0
