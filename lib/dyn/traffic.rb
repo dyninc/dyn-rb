@@ -52,7 +52,10 @@ module Dyn
         @user_name = user_name
         @password = password
         @rest = Dyn::HttpClient::DefaultClient.new("api2.dynect.net", "443", "https")
-        @rest.default_headers = { 'Content-Type' => 'application/json' }
+        @rest.default_headers = {
+          'User-Agent'   => 'dyn-rb 1.0.1',
+          'Content-Type' => 'application/x-www-form-urlencoded'
+        }
         @zone = zone 
         @verbose = verbose
         @session = Dyn::Traffic::Session.new(self)
