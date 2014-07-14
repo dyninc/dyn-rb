@@ -1,3 +1,3 @@
 module Dyn
-  VERSION='0.99.0'
+  VERSION='1.0.0'
 end
