@@ -23,12 +23,12 @@ module Dyn
         @dyn = dyn
       end
 
-      def count(starttime, endtime, sender, xheadername)
-        @dyn.get("#{resource_path}/count", {starttime:starttime, endtime:endtime, sender:sender, xheadername:xheadername})
+      def count(starttime, endtime)
+        @dyn.get("#{resource_path}/count", {starttime:starttime, endtime:endtime})
       end
 
-      def list(starttime, endtime, startindex=0, sender, xheadername)
-        @dyn.get("#{resource_path}", {starttime:starttime, endtime:endtime, startindex:startindex, sender:sender, xheadername:xheadername})
+      def list(starttime, endtime, startindex=0)
+        @dyn.get("#{resource_path}", {starttime:starttime, endtime:endtime, startindex:startindex})
       end
       
       private

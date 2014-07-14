@@ -23,20 +23,20 @@ module Dyn
         @dyn = dyn
       end
 
-      def count(starttime, endtime, xheadername)
-        @dyn.get("#{resource_path}/count", {starttime:starttime, endtime:endtime, xheadername:xheadername})
+      def count(starttime, endtime)
+        @dyn.get("#{resource_path}/count", {starttime:starttime, endtime:endtime})
       end
 
-      def list(starttime, endtime, startindex=0, xheadername)
-        @dyn.get("#{resource_path}", {starttime:starttime, endtime:endtime, startindex:startindex, xheadername:xheadername})
+      def list(starttime, endtime, startindex=0)
+        @dyn.get("#{resource_path}", {starttime:starttime, endtime:endtime, startindex:startindex})
       end
 
-      def unique_count(starttime, endtime, xheadername)
-        @dyn.get("#{resource_path}/count/unique", {starttime:starttime, endtime:endtime, xheadername:xheadername})
+      def unique_count(starttime, endtime)
+        @dyn.get("#{resource_path}/count/unique", {starttime:starttime, endtime:endtime})
       end
 
-      def unique(starttime, endtime, startindex=0, xheadername)
-        @dyn.get("#{resource_path}/unique", {starttime:starttime, endtime:endtime, startindex:startindex, xheadername:xheadername})
+      def unique(starttime, endtime, startindex=0)
+        @dyn.get("#{resource_path}/unique", {starttime:starttime, endtime:endtime, startindex:startindex})
       end
       
       private

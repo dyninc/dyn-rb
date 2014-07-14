@@ -36,7 +36,7 @@ dyn = Dyn::Messaging::Client.new(apikey)
 # puts dyn.accounts.list_xheaders.inspect
 # 
 # puts "updating xheaders..."
-# puts dyn.accounts.update_xheaders("X-header1").inspect
+# puts dyn.accounts.update_xheaders("X-HeaderValue1","X-Testing2","X-Wondering3","X-Observational4").inspect
 
 # # puts "deleting account..."
 # # puts dyn.accounts.destroy("account@example.com").inspect
@@ -63,31 +63,31 @@ dyn = Dyn::Messaging::Client.new(apikey)
 
 # delivery
 # puts "retrieving delivery count..."
-# puts dyn.delivery.count("2013-11-11", "2013-12-12", "example@example.com", "X-example4").inspect
+# puts dyn.delivery.count("2013-11-11", "2013-12-12").inspect
 # 
 # puts "retrieving delivery list..."
-# puts dyn.delivery.list("2013-11-11", "2013-12-12", "example@example.com", "X-example4").inspect
+# puts dyn.delivery.list("2013-11-11", "2013-12-12").inspect
 
 # sent
 # puts "retrieving sent count..."
-# puts dyn.sent_mail.count("2013-11-11", "2013-12-12", "example@example.com", "X-example4").inspect
+# puts dyn.sent_mail.count("2013-11-11", "2013-12-12").inspect
 # 
 # puts "retrieving sent list..."
-# puts dyn.sent_mail.list("2013-11-11", "2013-12-12", "example@example.com", "X-example4").inspect
+# puts dyn.sent_mail.list("2013-11-11", "2013-12-12").inspect
 
 # bounces
 # puts "retrieving bounces count..."
-# puts dyn.bounces.count("2013-11-11", "2013-12-12", "example@example.com", "X-example4").inspect
+# puts dyn.bounces.count("2013-11-11", "2013-12-12").inspect
 # 
 # puts "retrieving bounces list..."
-# puts dyn.bounces.list("2013-11-11", "2013-12-12", 0, "example@example.com", "dani@thesunnycloud.com", "hardbounce", "noheaders" "X-example4").inspect
+# puts dyn.bounces.list("2013-11-11", "2013-12-12", 0).inspect
 
 # complaints
 # puts "retrieving complaints count..."
-# puts dyn.complaints.count("2013-11-11", "2013-12-12", "example@example.com", "X-example4").inspect
+# puts dyn.complaints.count("2013-11-11", "2013-12-12").inspect
 # 
 # puts "retrieving complaints list..."
-# puts dyn.complaints.list("2013-11-11", "2013-12-12", "example@example.com", "X-example4").inspect
+# puts dyn.complaints.list("2013-11-11", "2013-12-12").inspect
 
 # issues
 # puts "retrieving issues count..."
@@ -98,29 +98,29 @@ dyn = Dyn::Messaging::Client.new(apikey)
 
 # opens
 # puts "retrieving opens count..."
-# puts dyn.opens.count("2013-11-11", "2013-12-12", "X-example4").inspect
+# puts dyn.opens.count("2013-11-11", "2013-12-12").inspect
 # 
 # puts "retrieving opens list..."
-# puts dyn.opens.list("2013-11-11", "2013-12-12", "X-example4").inspect
+# puts dyn.opens.list("2013-11-11", "2013-12-12").inspect
 # 
 # puts "retrieving unique opens count..."
-# puts dyn.opens.unique_count("2013-11-11", "2013-12-12", "X-example4").inspect
+# puts dyn.opens.unique_count("2013-11-11", "2013-12-12").inspect
 # 
 # puts "retrieving unique list..."
-# puts dyn.opens.unique("2013-11-11", "2013-12-12", "X-example4").inspect
+# puts dyn.opens.unique("2013-11-11", "2013-12-12").inspect
 
 # clicks
 # puts "retrieving clicks count..."
-# puts dyn.clicks.count("2013-11-11", "2013-12-12", "X-example4").inspect
+# puts dyn.clicks.count("2013-11-11", "2013-12-12").inspect
 # 
 # puts "retrieving clicks list..."
-# puts dyn.clicks.list("2013-11-11", "2013-12-12", "X-example4").inspect
+# puts dyn.clicks.list("2013-11-11", "2013-12-12").inspect
 # 
 # puts "retrieving unique clicks count..."
-# puts dyn.clicks.unique_count("2013-11-11", "2013-12-12", "X-example4").inspect
+# puts dyn.clicks.unique_count("2013-11-11", "2013-12-12").inspect
 # 
 # puts "retrieving unique list..."
-# puts dyn.clicks.unique("2013-11-11", "2013-12-12", "X-example4").inspect
+# puts dyn.clicks.unique("2013-11-11", "2013-12-12").inspect
 
 # send mail
 # puts "sending mail..."
