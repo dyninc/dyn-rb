@@ -3,6 +3,10 @@
 NOTE: This SDK is brand new - we welcome your feedback!
 Please reach out via pull request or GitHub issue.
 
+Install via:
+
+    gem install dyn-rb
+
 Making DNS Updates as easy as:
 
     require 'dyn-rb'
