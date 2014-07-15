@@ -1,6 +1,6 @@
 require 'dyn-rb'
 
-d = Dyn::Traffic::Client.new(ENV['DYN_CUSTOMER'] || ARGV[0], ENV['DYN_USERNAME'] || ARGV[1], ENV['DYN_PASSWORD'] || ARGV[2])
+d = Dyn::Traffic::Client.new(customername, username, password)
 
 d.zone = "example.com"
 
@@ -18,28 +18,28 @@ puts d.zone.publish
 # puts d.http_redirect.fqdn("cool.example.com").code(301).keep_uri("Y").url("https://maint.example.com").delete
 # puts d.zone.publish
 
-# 
+#
 # gslb = d.gslb
 # gslb.fqdn("sunshine.example.com").ttl(30).region_code("global")
 # gslb.min_healthy(1).serve_count(2)
 # gslb.monitor(:protocol => "HTTP", :interval => 1, :port => 8000, :path => "/healthcheck", :host => "sunshine.example.com")
 # gslb.add_host(:address => "1.1.1.1", :label => "friendly_name", :weight => 10, :serve_mode => "obey")
 # gslb.add_host(:address => "1.1.1.2", :label => "friendly_name2", :weight => 10, :serve_mode => "obey")
-# 
+#
 # sleep 5
-# 
+#
 # puts gslb.save.inspect
 # puts gslb.publish
-# 
+#
 # puts gslb.inspect
-# 
-# 
+#
+#
 # sleep 5
-# 
+#
 # puts d.zone.delete.inspect
 # puts d.zone.get_all.inspect
-# 
+#
 # puts d.get('Contact').inspect
-# 
+#
 # puts d.logout
-# 
+#
