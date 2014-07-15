@@ -15,5 +15,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-require 'dyn/traffic'
-require 'dyn/messaging'
+
+module Dyn
+  module Messaging
+    class Bounces
+      def initialize(dyn)
+        @dyn = dyn
+      end
+
+      def count(starttime, endtime)
+        @dyn.get("#{resource_path}/count", {starttime:starttime, endtime:endtime})
+      end
+
+      def list(starttime, endtime, startindex=0)
+        @dyn.get("#{resource_path}", {starttime:starttime, endtime:endtime, startindex:startindex})
+      end
+      
+      private
+      
+      def resource_path
+        "reports/bounces"
+      end
+    end
+  end
+end

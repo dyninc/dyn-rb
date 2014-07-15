@@ -26,7 +26,9 @@ module Dyn
       require 'dyn/traffic/base'
       require 'dyn/traffic/gslb'
       require 'dyn/traffic/http_redirect'
+      require 'dyn/traffic/qps_report'
       require 'dyn/traffic/resource'
+      require 'dyn/traffic/secondary_zone'
       require 'dyn/traffic/session'
       require 'dyn/traffic/zone'
       require 'dyn/http/http_client'
@@ -50,7 +52,10 @@ module Dyn
         @user_name = user_name
         @password = password
         @rest = Dyn::HttpClient::DefaultClient.new("api2.dynect.net", "443", "https")
-        @rest.default_headers = { 'Content-Type' => 'application/json' }
+        @rest.default_headers = {
+          'User-Agent'   => 'dyn-rb 1.0.3',
+          'Content-Type' => 'application/json'
+        }
         @zone = zone 
         @verbose = verbose
         @session = Dyn::Traffic::Session.new(self)
