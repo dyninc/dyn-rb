@@ -1,6 +1,6 @@
 require 'dyn-rb'
 
-d = Dyn::Traffic::Client.new(customername, username, password)
+d = Dyn::Traffic::Client.new('yourcustomername', 'yourusername', 'yourpassword')
 
 d.zone = "example.com"
 
