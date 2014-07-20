@@ -15,4 +15,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.rubygems_version = "2.0.3"
   s.summary = "Dyn Ruby SDK"
+
+  s.add_development_dependency "rspec"
+  s.add_development_dependency "webmock"
 end
