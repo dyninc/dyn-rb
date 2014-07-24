@@ -75,7 +75,7 @@ module Dyn
         elsif fqdn
           results = @dyn.get("#{resource_path}/#{fqdn}")
           raw_rr_list = results.map do |record|
-            if (record =~ /^#{resource_path(true)}\/#{Regexp.escape(fqdn)}\/(\d+)$/)
+            if (record =~ /^#{resource_path(:full)}\/#{Regexp.escape(fqdn)}\/(\d+)$/)
               self.get(fqdn, $1)
             else
               record
