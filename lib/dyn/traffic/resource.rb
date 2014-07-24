@@ -64,10 +64,10 @@ module Dyn
 
       def get(fqdn = nil, record_id=nil)
         if record_id && fqdn
-          raw_rr = @dynect.get("#{resource_path}/#{fqdn}/#{record_id}")
+          raw_rr = @dyn.get("#{resource_path}/#{fqdn}/#{record_id}")
           Dyn::Traffic::Resource.new(@dyn,
-                                   raw_rr["record_type"],
                                    raw_rr["zone"],
+                                   raw_rr["record_type"],
                                    raw_rr["fqdn"],
                                    raw_rr["record_id"],
                                    raw_rr["ttl"],
