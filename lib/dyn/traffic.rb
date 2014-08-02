@@ -91,6 +91,11 @@ module Dyn
         zone.publish
       end
 
+      # for convenience...
+      def discard_change_set
+        zone.discard_change_set
+      end
+
       ##
       # Zone attribute setter
       ##
