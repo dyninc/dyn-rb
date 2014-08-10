@@ -3,12 +3,11 @@ require "rubygems"
 require "bundler"
 Bundler.setup
 
-require 'spec_helper'
-
+require "spec_helper"
 require "rspec"
 require "webmock/rspec"
 
-require File.expand_path(File.join(File.dirname(__FILE__), "../lib/dyn-rb.rb"))
+require File.expand_path(File.join(File.dirname(__FILE__), "../../lib/dyn-rb.rb"))
 
 describe Dyn::Messaging::Client do
 
