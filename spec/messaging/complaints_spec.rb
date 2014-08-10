@@ -18,7 +18,7 @@ describe Dyn::Messaging::Client do
     @dyn = Dyn::Messaging::Client.new(@DEFAULT_API_KEY)
   end
 
-  describe "/bounces" do
+  describe "/complaints" do
 
     describe "/count" do
 
@@ -26,9 +26,9 @@ describe Dyn::Messaging::Client do
         start_time = 1
         end_time = 2
 
-        stub = stub_request(:get, "#{@API_BASE_PATH}/reports/bounces/count?apikey=#{@DEFAULT_API_KEY}&starttime=#{start_time}&endtime=#{end_time}")
+        stub = stub_request(:get, "#{@API_BASE_PATH}/reports/complaints/count?apikey=#{@DEFAULT_API_KEY}&starttime=#{start_time}&endtime=#{end_time}")
 
-        @dyn.bounces.count(start_time,end_time)
+        @dyn.complaints.count(start_time,end_time)
 
         expect(stub).to have_been_requested
       end
@@ -41,9 +41,9 @@ describe Dyn::Messaging::Client do
         start_time = 1
         end_time = 2
 
-        stub = stub_request(:get, "#{@API_BASE_PATH}/reports/bounces?apikey=#{@DEFAULT_API_KEY}&starttime=#{start_time}&endtime=#{end_time}&startindex=0")
+        stub = stub_request(:get, "#{@API_BASE_PATH}/reports/complaints?apikey=#{@DEFAULT_API_KEY}&starttime=#{start_time}&endtime=#{end_time}&startindex=0")
 
-        @dyn.bounces.list(start_time,end_time)
+        @dyn.complaints.list(start_time,end_time)
 
         expect(stub).to have_been_requested
       end
@@ -53,9 +53,9 @@ describe Dyn::Messaging::Client do
         end_time = 2
         start_index = 40
 
-        stub = stub_request(:get, "#{@API_BASE_PATH}/reports/bounces?apikey=#{@DEFAULT_API_KEY}&starttime=#{start_time}&endtime=#{end_time}&startindex=#{start_index}")
+        stub = stub_request(:get, "#{@API_BASE_PATH}/reports/complaints?apikey=#{@DEFAULT_API_KEY}&starttime=#{start_time}&endtime=#{end_time}&startindex=#{start_index}")
 
-        @dyn.bounces.list(start_time,end_time,start_index)
+        @dyn.complaints.list(start_time,end_time,start_index)
 
         expect(stub).to have_been_requested
       end
