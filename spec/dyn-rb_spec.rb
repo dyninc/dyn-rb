@@ -3,30 +3,65 @@ require "rubygems"
 require "bundler"
 Bundler.setup
 
-require "rspec"
-require 'webmock/rspec'
-require "pp"
+require 'spec_helper'
 
-require File.expand_path(File.join(File.dirname(__FILE__), '../lib/dyn-rb.rb'))
+require "rspec"
+require "webmock/rspec"
+
+require File.expand_path(File.join(File.dirname(__FILE__), "../lib/dyn-rb.rb"))
 
 describe Dyn::Messaging::Client do
 
-  describe "Sample" do
+  DEFAULT_API_KEY = 1
+  API_BASE_PATH = 'https://emailapi.dynect.net/rest/json'
 
-    it "gets bounces" do
+  before(:all) do
+    @dyn = Dyn::Messaging::Client.new(DEFAULT_API_KEY)
+  end
 
-      # comment this in to make the test pass
-      #stub_request(:get, "https://emailapi.dynect.net/rest/json/reports/bounces?apikey=1&endtime=3&startindex=0&starttime=2")
-      #  .with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'application/x-www-form-urlencoded', 'User-Agent'=>'dyn-rb 1.0.3'})
+  describe "/bounces" do
 
-      dyn = Dyn::Messaging::Client.new(1)
-      response =  dyn.bounces.list(2,3)
+    describe "/count" do
 
-      a_request(:get, "https://emailapi.dynect.net/rest/json/reports/bounces?apikey=1&endtime=3&startindex=0&starttime=2")
-        .with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Content-Type'=>'application/x-www-form-urlencoded', 'User-Agent'=>'dyn-rb 1.0.3'}).should have_been_made
+      it "a date range" do
+        start_time = 1
+        end_time = 2
+
+        stub = stub_request(:get, "#{API_BASE_PATH}/reports/bounces/count?apikey=#{DEFAULT_API_KEY}&starttime=#{start_time}&endtime=#{end_time}")
+
+        @dyn.bounces.count(start_time,end_time)
+
+        expect(stub).to have_been_requested
+      end
 
     end
 
+    describe "/list" do
+
+      it "a date range with default startindex" do
+        start_time = 1
+        end_time = 2
+
+        stub = stub_request(:get, "#{API_BASE_PATH}/reports/bounces?apikey=#{DEFAULT_API_KEY}&starttime=#{start_time}&endtime=#{end_time}&startindex=0")
+
+        @dyn.bounces.list(start_time,end_time)
+
+        expect(stub).to have_been_requested
+      end
+
+      it "a date range with a specific start index" do
+        start_time = 1
+        end_time = 2
+        start_index = 40
+
+        stub = stub_request(:get, "#{API_BASE_PATH}/reports/bounces?apikey=#{DEFAULT_API_KEY}&starttime=#{start_time}&endtime=#{end_time}&startindex=#{start_index}")
+
+        @dyn.bounces.list(start_time,end_time,start_index)
+
+        expect(stub).to have_been_requested
+      end
+
+    end
   end
 
 end

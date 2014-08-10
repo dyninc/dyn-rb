@@ -1,0 +1,4 @@
+.rspec
+--drb
+--format Fuubar
+--color
