@@ -27,8 +27,8 @@ module Dyn
         @dyn.get("#{resource_path}/count", {starttime:starttime, endtime:endtime})
       end
 
-      def list(starttime, endtime, startindex=0)
-        @dyn.get("#{resource_path}", {starttime:starttime, endtime:endtime, startindex:startindex})
+      def list(starttime, endtime, startindex=0, emailaddress=nil)
+        @dyn.get("#{resource_path}", {starttime:starttime, endtime:endtime, startindex:startindex, emailaddress:emailaddress})
       end
       
       private
