@@ -1,22 +1,6 @@
-#!/usr/bin/env ruby
-require "rubygems"
-require "bundler"
-Bundler.setup
-
-require "spec_helper"
-require "rspec"
-require "webmock/rspec"
-
-require File.expand_path(File.join(File.dirname(__FILE__), "../../lib/dyn-rb.rb"))
+require 'spec_helper'
 
 describe Dyn::Messaging::Client do
-
-  before(:all) do
-    @DEFAULT_API_KEY = 1
-    @API_BASE_PATH = 'https://emailapi.dynect.net/rest/json'
-
-    @dyn = Dyn::Messaging::Client.new(@DEFAULT_API_KEY)
-  end
 
   describe "accounts()" do
 
@@ -27,7 +11,10 @@ describe Dyn::Messaging::Client do
     xheader3 = "c"
     xheader4 = "d"
 
-    subject { @dyn.accounts }
+    subject {
+      dyn = Dyn::Messaging::Client.new(@DEFAULT_API_KEY)
+      dyn.accounts
+    }
 
     it "should list results with the default startindex" do
       stub = stub_request(:get, "#{@API_BASE_PATH}/accounts?apikey=#{@DEFAULT_API_KEY}&startindex=0")
