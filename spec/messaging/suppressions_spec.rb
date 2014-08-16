@@ -18,78 +18,55 @@ describe Dyn::Messaging::Client do
     @dyn = Dyn::Messaging::Client.new(@DEFAULT_API_KEY)
   end
 
-  describe "/suppressions" do
+  describe "suppressions()" do
 
-    describe "/count" do
+    subject { @dyn.suppressions }
 
-      it "a date range" do
-        start_date = 1
-        end_date = 2
+    start_date = 1
+    end_date = 2
+    start_index = 40
+    emailaddress = "abc@foobar.com"
 
-        stub = stub_request(:get, "#{@API_BASE_PATH}/suppressions/count?apikey=#{@DEFAULT_API_KEY}&startdate=#{start_date}&enddate=#{end_date}")
+    it "should be countable" do
+      stub = stub_request(:get, "#{@API_BASE_PATH}/suppressions/count?apikey=#{@DEFAULT_API_KEY}&startdate=#{start_date}&enddate=#{end_date}")
 
-        @dyn.suppressions.count(start_date,end_date)
+      subject.send(:count, start_date, end_date)
 
-        expect(stub).to have_been_requested
-      end
-
+      expect(stub).to have_been_requested
     end
 
-    describe "/list" do
+    it "should list results for a date range with the default startindex" do
+      stub = stub_request(:get, "#{@API_BASE_PATH}/suppressions?apikey=#{@DEFAULT_API_KEY}&startdate=#{start_date}&enddate=#{end_date}&startindex=0")
 
-      it "a date range with default startindex" do
-        start_date = 1
-        end_date = 2
+      subject.send(:list,start_date, end_date)
 
-        stub = stub_request(:get, "#{@API_BASE_PATH}/suppressions?apikey=#{@DEFAULT_API_KEY}&startdate=#{start_date}&enddate=#{end_date}&startindex=0")
-
-        @dyn.suppressions.list(start_date,end_date)
-
-        expect(stub).to have_been_requested
-      end
-
-      it "a date range with a specific start index" do
-        start_date = 1
-        end_date = 2
-        start_index = 40
-
-        stub = stub_request(:get, "#{@API_BASE_PATH}/suppressions?apikey=#{@DEFAULT_API_KEY}&startdate=#{start_date}&enddate=#{end_date}&startindex=#{start_index}")
-
-        @dyn.suppressions.list(start_date,end_date,start_index)
-
-        expect(stub).to have_been_requested
-      end
-
+      expect(stub).to have_been_requested
     end
 
-    describe "/create" do
+    it "should list results for a date range with a specified start index" do
+      stub = stub_request(:get, "#{@API_BASE_PATH}/suppressions?apikey=#{@DEFAULT_API_KEY}&startdate=#{start_date}&enddate=#{end_date}&startindex=#{start_index}")
 
-      it "creates" do
-        emailaddress = "abc@foobar.com"
+      subject.send(:list, start_date, end_date, start_index)
 
-        stub = stub_request(:post, "#{@API_BASE_PATH}/suppressions")
-          .with(:body => {"apikey"=>"#{@DEFAULT_API_KEY}", "emailaddress"=>emailaddress})
-
-        @dyn.suppressions.create(emailaddress)
-
-        expect(stub).to have_been_requested
-      end
-
+      expect(stub).to have_been_requested
     end
 
-    describe "/activate" do
-
-      it "activates" do
-        emailaddress = "abc@foobar.com"
-
-        stub = stub_request(:post, "#{@API_BASE_PATH}/suppressions/activate")
+    it "should create a new suppression list entry" do
+      stub = stub_request(:post, "#{@API_BASE_PATH}/suppressions")
         .with(:body => {"apikey"=>"#{@DEFAULT_API_KEY}", "emailaddress"=>emailaddress})
 
-        @dyn.suppressions.activate(emailaddress)
+      subject.send(:create, emailaddress)
 
-        expect(stub).to have_been_requested
-      end
+      expect(stub).to have_been_requested
+    end
 
+    it "should activates an email address on the suppression list" do
+      stub = stub_request(:post, "#{@API_BASE_PATH}/suppressions/activate")
+      .with(:body => {"apikey"=>"#{@DEFAULT_API_KEY}", "emailaddress"=>emailaddress})
+
+      subject.send(:activate, emailaddress)
+
+      expect(stub).to have_been_requested
     end
 
   end
