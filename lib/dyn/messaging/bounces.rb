@@ -27,8 +27,12 @@ module Dyn
         @dyn.get("#{resource_path}/count", {starttime:starttime, endtime:endtime})
       end
 
-      def list(starttime, endtime, startindex=0, emailaddress="")
-        @dyn.get("#{resource_path}", {starttime:starttime, endtime:endtime, startindex:startindex, emailaddress:emailaddress})
+      def list(starttime, endtime, startindex=0, emailaddress=nil)
+        if not emailaddress.nil?
+          @dyn.get("#{resource_path}", {starttime:starttime, endtime:endtime, startindex:startindex, emailaddress:emailaddress})
+        else
+          @dyn.get("#{resource_path}", {starttime:starttime, endtime:endtime, startindex:startindex})
+        end
       end
       
       private

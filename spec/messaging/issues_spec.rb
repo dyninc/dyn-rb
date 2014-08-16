@@ -18,49 +18,9 @@ describe Dyn::Messaging::Client do
     @dyn = Dyn::Messaging::Client.new(@DEFAULT_API_KEY)
   end
 
-  describe "/issues" do
-
-    describe "/count" do
-
-      it "a date range" do
-        start_time = 1
-        end_time = 2
-
-        stub = stub_request(:get, "#{@API_BASE_PATH}/reports/issues/count?apikey=#{@DEFAULT_API_KEY}&starttime=#{start_time}&endtime=#{end_time}")
-
-        @dyn.issues.count(start_time,end_time)
-
-        expect(stub).to have_been_requested
-      end
-
-    end
-
-    describe "/list" do
-
-      it "a date range with default startindex" do
-        start_time = 1
-        end_time = 2
-
-        stub = stub_request(:get, "#{@API_BASE_PATH}/reports/issues?apikey=#{@DEFAULT_API_KEY}&starttime=#{start_time}&endtime=#{end_time}&startindex=0")
-
-        @dyn.issues.list(start_time,end_time)
-
-        expect(stub).to have_been_requested
-      end
-
-      it "a date range with a specific start index" do
-        start_time = 1
-        end_time = 2
-        start_index = 40
-
-        stub = stub_request(:get, "#{@API_BASE_PATH}/reports/issues?apikey=#{@DEFAULT_API_KEY}&starttime=#{start_time}&endtime=#{end_time}&startindex=#{start_index}")
-
-        @dyn.issues.list(start_time,end_time,start_index)
-
-        expect(stub).to have_been_requested
-      end
-
-    end
+  describe "issues()" do
+    subject { @dyn.issues }
+    it_should_behave_like "a collection", "reports/issues"
   end
 
 end
