@@ -33,6 +33,16 @@ module Dyn
         @dyn.put("Zone/#{@zone}", { "publish" => true })
       end
 
+      # Discard any pending changes in the session - required if you don't with to persist changes.
+      #
+      # See: https://help.dynect.net/delete-zone-change-set-api/
+      #
+      # @param [String] The zone to discard changes for - if one is provided when instantiated, we use that.
+      # @return [Hash] The dynect API response
+      def discard_change_set
+        @dyn.delete("ZoneChanges/#{@zone}")
+      end
+
       # Freeze the zone.
       #
       # See: https://manage.dynect.net/help/docs/api2/rest/resources/Zone.html
@@ -52,6 +62,7 @@ module Dyn
       def thaw
         @dyn.put("Zone/#{@zone}", { "thaw" => true })
       end
+
     end
   end
 end
