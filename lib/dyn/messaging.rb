@@ -136,13 +136,8 @@ module Dyn
         response_body = begin
           response = block.call
           response.body
-        rescue Exception => e
-          if @verbose
-            puts "I have #{e.inspect} with #{e.http_code}"
-          end
-          e.response
         end
-        
+
         response = JSON.parse(response_body || '{}')
         
         if (response["response"] && response["response"]["status"] == 200)

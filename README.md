@@ -98,6 +98,15 @@ See more comprehensive examples in the "examples" folder!
 * curb
 * patron
 
+# Testing
+
+To test that this API clients generates the correct REST URls for the API,
+we use rspec and [webmock](https://github.com/bblimke/webmock).
+
+To run the tests run:
+
+		$ rspec
+
 # Known Issues
 
 * None yet
