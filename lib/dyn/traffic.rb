@@ -199,24 +199,14 @@ module Dyn
 
       # Handles making Dynect API requests and formatting the responses properly.
       def api_request(&block)
-        response_body = begin
-          response = block.call
-          response.body
-        rescue Exception => e
-          if @verbose
-            puts "I have #{e.inspect} with #{e.http_code}"
-          end
-          if e.http_code == 307
-            e.response.sub!('/REST/','') if e.response =~ /^\/REST\//
-            get(e.response)
-          end
-          e.response
+        response = block.call
+        if response.status == 307 and response.body =~ /^\/REST\//
+          response.body.sub!('/REST/','') 
+          response = get(response.body)
         end
-        
-        parse_response(JSON.parse(response_body || '{}'))
+        parse_response(JSON.parse(response.body || '{}'))
       end
 
-      # 
       def parse_response(response)
         case response["status"]
         when "success"
@@ -226,8 +216,10 @@ module Dyn
           # raise an error and return the job ID in case we want to ask the API what the job's status is
           error_messages = []
           error_messages.push( "This session may have a job _still_ running (slowly). Call /REST/Job/#{response["job_id"]} to get its status." )
-          response["msgs"].each do |error_message|
-            error_messages << "#{error_message["LVL"]} #{error_message["ERR_CD"]} #{error_message["SOURCE"]} - #{error_message["INFO"]}"
+          if response["msgs"]
+            response["msgs"].each do |error_message|
+              error_messages << "#{error_message["LVL"]} #{error_message["ERR_CD"]} #{error_message["SOURCE"]} - #{error_message["INFO"]}"
+            end
           end
           raise Dyn::Exceptions::IncompleteRequest.new( "#{error_messages.join("\n")}", response["job_id"] )
         when "failure"
