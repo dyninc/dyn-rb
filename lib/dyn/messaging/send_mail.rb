@@ -24,7 +24,8 @@ module Dyn
       end
 
       def create(from, to, subject, bodytext, bodyhtml, cc, replyto, xheaders)
-        @dyn.post("#{resource_path}", {from:from, to:to, subject:subject, bodytext:bodytext, bodyhtml:bodyhtml, cc:cc, replyto:replyto, xheaders:xheaders})
+        @dyn.post("#{resource_path}", {from:from, to:to, subject:subject, bodytext:bodytext, bodyhtml:bodyhtml, cc:cc, replyto:replyto}.
+          merge( xheaders))
       end
       
       private
