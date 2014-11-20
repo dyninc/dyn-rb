@@ -50,7 +50,7 @@ module Dyn
         @apikey = apikey
         @rest = Dyn::HttpClient::DefaultClient.new("emailapi.dynect.net", "443", "https")
         @rest.default_headers = {
-          'User-Agent'   => 'dyn-rb 1.0.4',
+          'User-Agent'   => Dyn::VERSION,
           'Content-Type' => 'application/x-www-form-urlencoded'
         }
         @verbose = verbose

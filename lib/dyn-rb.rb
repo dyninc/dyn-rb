@@ -17,3 +17,4 @@
 #
 require 'dyn/traffic'
 require 'dyn/messaging'
+require 'dyn/version'
