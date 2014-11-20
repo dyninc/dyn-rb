@@ -1,0 +1,35 @@
+# Ignore rake's cache
+.rake_test_cache
+
+# Ignore OSX related files
+.DS_Store
+
+# Ignore rvmrc file
+.rvmrc
+
+# Ignore VIM swap files
+*.swp
+*.swo
+
+# Ignore emacs swap files
+\#*
+
+# Ignore merge/diff files
+*.orig
+
+# Ignore editor temporary files
+*~
+
+# Ignore file locks
+*.lock
+
+# Ignore tmp dir
+tmp/*
+#
+
+# Ignore compiled gem
+*.gem
+
+# Documentation should only be in gh-pages branch
+docs/*
+!docs/README.md

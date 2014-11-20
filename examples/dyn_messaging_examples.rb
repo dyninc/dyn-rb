@@ -3,125 +3,67 @@ apikey = "yourapikey"
 require 'dyn-rb'
 dyn = Dyn::Messaging::Client.new(apikey)
 
-# senders
-# puts "retrieving senders list..."
-# puts dyn.senders.list(2).inspect
-# 
-# puts "creating sender..."
-# puts dyn.senders.create("person@example.com", 0).inspect
-# 
-# puts "updating sender..."
-# puts dyn.senders.update("person@example.com", 2).inspect
-# 
-# puts "getting details..."
-# puts dyn.senders.details("person@example.com").inspect
-# 
-# puts "getting status..."
-# puts dyn.senders.status("person@example.com").inspect
-# 
-# puts "updating dkim..."
-# puts dyn.senders.dkim("person@example.com", "3").inspect
+from = 'Sender <sender@example.com>'
+to = 'Recipient <client@somecompany.com>'
+subject = 'Test send from Ruby Client'
+bodytext = 'This is a test of the Ruby Client'
+xheaders = {
+    	'X-Campaign' => 'value1',
+    	'X-Local' => 'value2',
+    	'X-TheFooRemains' => 'true',
+    	'X-theFourth' => 'empty'
+    }
 
-# # puts "deleting sender..."
-# # puts dyn.senders.destroy("person@example.com").inspect
 
 # accounts
-# puts "creating account..."
-# puts dyn.accounts.create("account@example.com", "secrets", "big company", "(123) 456-7890", "123 main street", "boston", "MA", "12345", "east coast", "http://www.bounce.com", "http://www.spam.com", "http://www.unsubscribeme.com", "http://www.trackopensplease.com", "http://www.tracklinksplease.com", "http://www.trackunsubscribesplease.com", "generatenewapikeyplease").inspect
-# 
-# puts "retrieving accounts list..."
-# puts dyn.accounts.list.inspect
-# 
-# puts "retrieving xheaders list..."
-# puts dyn.accounts.list_xheaders.inspect
-# 
-# puts "updating xheaders..."
-# puts dyn.accounts.update_xheaders("X-HeaderValue1","X-Testing2","X-Wondering3","X-Observational4").inspect
+puts "creating account..."
+sub_acct_apikey = dyn.accounts.create("account@example.com", "secrets", "big company", "(123) 456-7890", "123 main street", "boston", "MA", "12345", "east coast", "http://www.bounce.com", "http://www.spam.com", "http://www.unsubscribeme.com", "http://www.trackopensplease.com", "http://www.tracklinksplease.com", "http://www.trackunsubscribesplease.com", "generatenewapikeyplease")
+puts sub_acct_apikey
 
-# # puts "deleting account..."
-# # puts dyn.accounts.destroy("account@example.com").inspect
+puts "adding xheaders..."
+puts dyn.accounts.update_xheaders("X-HeaderName1","X-Testing2","X-Wondering3","X-Observational4")
 
-# recipients
-# puts "retrieving status of recipient..."
-# puts dyn.recipients.status("example@example.com").inspect
-# 
-# puts "activating recipient..."
-# puts dyn.recipients.activate("example@example.com").inspect
+puts "retrieving xheaders list..."
+puts dyn.accounts.list_xheaders
 
-# suppressions
-# puts "retrieving suppressions list..."
-# puts dyn.suppressions.list("2013-11-11", "2013-12-12").inspect
-# 
-# puts "retrieving suppressions count..."
-# puts dyn.suppressions.count("2013-11-11", "2013-12-12").inspect
-# 
-# puts "adding to suppression list..."
-# puts dyn.suppressions.create("example@example.com").inspect
-# 
-# puts "activating from suppression list..."
-# puts dyn.suppressions.activate("example@example.com").inspect
+puts "updating xheaders"
+args = xheaders.keys
+puts dyn.accounts.update_xheaders(*args)
 
-# delivery
-# puts "retrieving delivery count..."
-# puts dyn.delivery.count("2013-11-11", "2013-12-12").inspect
-# 
-# puts "retrieving delivery list..."
-# puts dyn.delivery.list("2013-11-11", "2013-12-12").inspect
+puts "listing updated headers"
+puts dyn.accounts.list_xheaders
 
-# sent
-# puts "retrieving sent count..."
-# puts dyn.sent_mail.count("2013-11-11", "2013-12-12").inspect
-# 
-# puts "retrieving sent list..."
-# puts dyn.sent_mail.list("2013-11-11", "2013-12-12").inspect
+puts "deleting account..."
+puts dyn.accounts.destroy("account@example.com")
 
-# bounces
-# puts "retrieving bounces count..."
-# puts dyn.bounces.count("2013-11-11", "2013-12-12").inspect
-# 
-# puts "retrieving bounces list..."
-# puts dyn.bounces.list("2013-11-11", "2013-12-12", 0).inspect
 
-# complaints
-# puts "retrieving complaints count..."
-# puts dyn.complaints.count("2013-11-11", "2013-12-12").inspect
+# senders
+puts "retrieving senders list..."
+puts dyn.senders.list
+puts dyn.senders.list(2)
 # 
-# puts "retrieving complaints list..."
-# puts dyn.complaints.list("2013-11-11", "2013-12-12").inspect
+puts "creating sender..."
+puts dyn.senders.create("person@example.com",0)
+puts dyn.senders.list
 
-# issues
-# puts "retrieving issues count..."
-# puts dyn.issues.count("2013-11-11", "2013-12-12").inspect
-# 
-# puts "retrieving issues list..."
-# puts dyn.issues.list("2013-11-11", "2013-12-12").inspect
+puts "getting details..."
+puts dyn.senders.details("person@example.com")
 
-# opens
-# puts "retrieving opens count..."
-# puts dyn.opens.count("2013-11-11", "2013-12-12").inspect
-# 
-# puts "retrieving opens list..."
-# puts dyn.opens.list("2013-11-11", "2013-12-12").inspect
-# 
-# puts "retrieving unique opens count..."
-# puts dyn.opens.unique_count("2013-11-11", "2013-12-12").inspect
-# 
-# puts "retrieving unique list..."
-# puts dyn.opens.unique("2013-11-11", "2013-12-12").inspect
+puts "getting status..."
+puts dyn.senders.status("person@example.com")
 
-# clicks
-# puts "retrieving clicks count..."
-# puts dyn.clicks.count("2013-11-11", "2013-12-12").inspect
-# 
-# puts "retrieving clicks list..."
-# puts dyn.clicks.list("2013-11-11", "2013-12-12").inspect
-# 
-# puts "retrieving unique clicks count..."
-# puts dyn.clicks.unique_count("2013-11-11", "2013-12-12").inspect
-# 
-# puts "retrieving unique list..."
-# puts dyn.clicks.unique("2013-11-11", "2013-12-12").inspect
+puts "updating dkim..."
+dyn.senders.dkim("person@example.com", "987")
+puts dyn.senders.details("person@example.com")
+
+puts "deleting sender..."
+puts dyn.senders.destroy("person@example.com")
+puts dyn.senders.list
+
 
 # send mail
-# puts "sending mail..."
-# puts dyn.send_mail.create("example@example.com", "recipient@recipient.com", "hi!", "from the ruby api!", "<html>hi html</html>", "replyto@example.com", "ccaddress@recipient.com", "xheader1").inspect
+# make sure sender is in approved list
+dyn.senders.create('sender@example.com')
+puts "sending mail..."
+puts dyn.send_mail.create(from, to, subject, bodytext, "<html>hi html</html>", "ccaddress@example.com", "replyto@recipient.com", xheaders)
+
