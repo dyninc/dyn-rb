@@ -23,9 +23,11 @@ module Dyn
         @dyn = dyn
       end
 
-      def create(from, to, subject, bodytext, bodyhtml, cc, replyto, xheaders)
+      # TODO: ??? test for valid X-header format??
+
+      def create(from, to, subject, bodytext, bodyhtml, cc, replyto, xheaders={})
         @dyn.post("#{resource_path}", {from:from, to:to, subject:subject, bodytext:bodytext, bodyhtml:bodyhtml, cc:cc, replyto:replyto}.
-          merge( xheaders))
+          merge(xheaders))
       end
       
       private
