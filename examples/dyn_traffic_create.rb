@@ -91,7 +91,7 @@ if not (cname.empty? and cname.nil?)
     cname_fqdn = cname_rec.fqdn
     cname_target = cname_rec.rdata['cname']
     puts "WARN: CNAME exists #{cname_fqdn} -> #{cname_target} ...  Not adding."
-  rescue Dynect::Exceptions::RequestFailed
+  rescue Dyn::Exceptions::RequestFailed
     puts "Adding CNAME #{cname} -> #{fullhost}"
     dyn.cname.fqdn(cname).ttl(rrttl).cname(fullhost).save
   end
