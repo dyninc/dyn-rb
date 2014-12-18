@@ -98,6 +98,8 @@ See more comprehensive examples in the "examples" folder!
 * curb
 * patron
 
+NB: this experimental feature is not fully implemented, and may be removed in future releases
+
 # Testing
 
 To test that this API clients generates the correct REST URls for the API,
@@ -109,7 +111,7 @@ To run the tests run:
 
 # Known Issues
 
-* None yet
+* see [Issues](https://github.com/dyninc/dyn-rb/issues)
 
 # License
 
