@@ -63,6 +63,15 @@ module Dyn
         @dyn.put("Zone/#{@zone}", { "thaw" => true })
       end
 
+      # Show pending changes to zone
+      #
+      # See: https://help.dyn.com/get-zone-changeset-api/
+      #
+      # @param [String] The zone which we want to see the changes for - if one is provided when instantiated, we use that.
+      # @return [Hash] The dynect API response
+      def get_change_set
+        @dyn.get("ZoneChanges/#{@zone}")
+      end
     end
   end
 end
