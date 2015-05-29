@@ -145,7 +145,7 @@ module Dyn
       ##
       # Resource Record API
       ##
-      %w{AAAA A CNAME DNSKEY DS KEY LOC MX NS PTR RP SOA SRV TXT}.each do |record_type|
+      %w{AAAA A CNAME DNSKEY DS KEY LOC MX NS PTR RP SOA SRV TXT SSHFP}.each do |record_type|
         define_method underscore(record_type) do
           Dyn::Traffic::Resource.new(self, @zone, "#{record_type}")
         end
