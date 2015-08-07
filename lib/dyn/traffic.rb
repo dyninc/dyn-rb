@@ -204,7 +204,7 @@ module Dyn
           response.body.sub!('/REST/','') 
           response = get(response.body)
         end
-        parse_response(JSON.parse(response.body || '{}'))
+        parse_response(response.body && response.body.length >= 2 ? JSON.parse(response.body) : {})
       end
 
       def parse_response(response)
